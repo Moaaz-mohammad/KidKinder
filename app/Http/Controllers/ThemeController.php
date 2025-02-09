@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classs;
 use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
     public function index() {
-        return view('theme.index');
+        $clsses = Classs::all();
+        return view('theme.index', compact('clsses'));
     }
 
     public function aboutPage() {
