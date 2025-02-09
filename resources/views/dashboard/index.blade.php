@@ -41,7 +41,7 @@
               </div>
               <!-- /.info-box -->
             </div>
-            <div class="card">
+            <div class="card mx-2">
               <div class="card-header">
                 <h3 class="card-title">Students</h3>
               <div class="card-tools">
@@ -51,21 +51,7 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-0">
-                {{-- <ul class="users-list clearfix">
-                  @foreach ($students as $student)
-                  <li>
-                    @if ($student->images()->count() > 0)
-                      <img src="{{ asset($student->images()->first()->file_path) }}" width="40" height="40" alt="User Image">
-                    @else
-                      <p class="text-danger">No Photo</p>
-                    @endif
-                    <a class="users-list-name" href="#">{{$student->first_name}}</a>
-                    <span class="users-list-date">{{$student->age}}</span>
-                    <p class="text-bold">________</p>
-                  </li>
-                  @endforeach
-                </ul> --}}
+              <div class="card-body p-2">
                 <div class="row">
                   @foreach ($students as $student)
                   <div class="col-md-4">
@@ -76,7 +62,7 @@
                         {{-- <h3 class="widget-user-username">{{$student->first_name}}</h3> --}}
                         {{-- <h5 class="widget-user-desc">{{$student->student_forign_id}}</h5> --}}
                       </div>
-                      <div class="widget-user-image">
+                      <div class="widget-user-image"> {{-- no-repeat center center--}}
                         @if ($student->images()->count() > 0)
                         <img class="img-circle elevation-2" src="{{asset($student->images()->first()->file_path)}}" alt="User Avatar">
                         @else
