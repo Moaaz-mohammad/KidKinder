@@ -17,7 +17,8 @@ class ThemeController extends Controller
     }
 
     public function classesPage() {
-        return view('theme.classes');
+        $clsses = Classs::all();
+        return view('theme.classes', compact('clsses'));
     }
 
     public function blogPage() {

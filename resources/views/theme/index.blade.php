@@ -231,7 +231,7 @@
                     <div class="col-6 py-1 text-right border-right">
                       <strong>Tution Fee</strong>
                     </div>
-                    <div class="col-6 py-1">$290 / Month</div>
+                    <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
                   </div>
                 </div>
                 <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
