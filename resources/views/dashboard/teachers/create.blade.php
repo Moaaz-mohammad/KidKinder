@@ -16,12 +16,12 @@
                 <label for="teacherName">Teacher Name</label>
                 <input type="text" class="form-control" id="teacherName" placeholder="Enter teacher name" name="name" required>
             </div>
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose Photo</label>
+                    <input type="file" class="custom-file-input" id="TeacherPhoto" name="TeacherPhoto" required>
+                    <label class="custom-file-label" for="TeacherPhoto">Choose Photo</label>
                 </div>
-            </div> --}}
+            </div>
             <div class="form-group">
                 <label for="teachingContent">Teaching content</label>
                 {{-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Class Number"> --}}

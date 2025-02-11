@@ -39,9 +39,9 @@ class TeacherController extends Controller
             'url_2' => 'nullable|url',
             'url_3' => 'nullable|url',
             'description' => 'nullable|string',
+            'TeacherPhoto' => 'required|image|max:2048',
         ]);
-        // return $request->all();
-        
+
         $teacher = Teacher::create([
             'name' => $data['name'],
             'main_techer' => 'known',
@@ -53,6 +53,20 @@ class TeacherController extends Controller
             'subject_2' => $data['subject_2'],
             'subject_3' => $data['subject_3'],
         ]);
+
+        if ($request->hasFile('TeacherPhoto')) {
+
+            $TeacherPhoto = $request->file('TeacherPhoto');
+        
+            $PhotoName = time() . '.' . $TeacherPhoto->extension();
+        
+            $TeacherPhoto->storeAs('public/images/', $PhotoName);
+
+            $teacher->images()->create([
+                'file_path' => 'storage/images/'. $PhotoName,
+                'file_name' => $PhotoName,
+            ]);
+        }
         return redirect()->route('teacher.index')->with('success', 'Teacher information saved successfully.');
 
     }

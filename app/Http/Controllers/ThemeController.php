@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classs;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
     public function index() {
         $clsses = Classs::all();
-        return view('theme.index', compact('clsses'));
+        $teachers = Teacher::all();
+        return view('theme.index', compact('clsses', 'teachers'));
     }
 
     public function aboutPage() {
@@ -26,7 +28,8 @@ class ThemeController extends Controller
     }
 
     public function teamPage() {
-        return view('theme.team');
+        $teachers = Teacher::all();
+        return view('theme.team', compact('teachers'));
     }
 
     public function galleryPage() {
