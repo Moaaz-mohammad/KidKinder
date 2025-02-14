@@ -198,7 +198,7 @@
           <h1 class="mb-4">Classes for Your Kids</h1>
         </div>
         <div class="row">
-          @foreach ($clsses as $class)
+          @foreach ($clsses->take(3) as $class)
             <div class="col-lg-4 mb-5">
               <div class="card border-0 bg-light shadow-sm pb-2">
                 <img class="card-img-top mb-2" src="img/class-1.jpg" alt="" />
@@ -335,7 +335,7 @@
           <h1 class="mb-4">Meet Our Teachers</h1>
         </div>
         <div class="row">
-          @foreach ($teachers as $teacher)
+          @foreach ($teachers->take(4) as $teacher)
             <div class="col-md-6 col-lg-3 text-center team mb-5">
               <div
                 class="position-relative overflow-hidden mb-4"
@@ -344,27 +344,26 @@
                 @if ($teacher->images()->count() > 0)
                   <img class="img-fluid w-100" style="width: 200px; height: 200px;  object-fit: cover;" src="{{asset($teacher->images()->first()->file_path)}}" alt="Photo" />
                 @endif
-                <div
-                  class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-                >
-                  <a
+                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                  {{-- <a
                     class="btn btn-outline-light text-center mr-2 px-0"
                     style="width: 38px; height: 38px"
                     href="#"
                     ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a
+                    >
+                  </a> --}}
+                  {{-- <a
                     class="btn btn-outline-light text-center mr-2 px-0"
                     style="width: 38px; height: 38px"
                     href="#"
                     ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a
+                  ></a> --}}
+                  {{-- <a
                     class="btn btn-outline-light text-center px-0"
                     style="width: 38px; height: 38px"
                     href="#"
                     ><i class="fab fa-linkedin-in"></i
-                  ></a>
+                  ></a> --}}
                 </div>
               </div>
               <h4>{{$teacher->name}}</h4>

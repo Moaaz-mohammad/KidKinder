@@ -102,9 +102,9 @@
           </div>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
+        {{-- <div class="card-footer">
           <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        </div> --}}
       </form>
       
     </div>
@@ -114,8 +114,8 @@
       <div class="card-header d-flex p-0">
         <h3 class="card-title p-3">Students</h3>
         <ul class="nav nav-pills ml-auto p-2">
-          <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Class Student</a></li>
-          <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">All Students</a></li>
+          {{-- <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Class Student</a></li> --}}
+          <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Show All Students</a></li>
           {{-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
               Dropdown <span class="caret"></span>
@@ -133,7 +133,7 @@
       <!-- /.card-header -->
         <div class="card-body">
           <div class="tab-content">
-            <div class="tab-pane active" id="tab_1">
+            {{-- <div class="tab-pane active" id="tab_1"> --}}
               {{-- <form action="">
                 @foreach ($students as $student)
                   <div class="callout callout-success">
@@ -156,12 +156,12 @@
                   </div>
                 @endforeach
               </form> --}}
-            </div>
+            {{-- </div> --}}
             <!-- /.tab-pane -->
             <div class="tab-pane" id="tab_2">
               <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
-                  <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                  {{-- <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                     <li class="nav-item">
                       <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">3 - 5</a>
                     </li>
@@ -174,7 +174,7 @@
                     <li class="nav-item">
                       <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">9 - 5</a>
                     </li>
-                  </ul>
+                  </ul> --}}
                 </div>
                 <div class="card-body">
                   <div class="tab-content" id="custom-tabs-four-tabContent">
@@ -238,7 +238,6 @@
 
 @section('js')
     <script>
-
 
       function submitForms() {
 
