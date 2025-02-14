@@ -18,6 +18,7 @@
                         <th>Subject</th>
                         <th>Subject</th>
                         <th>Subject</th>
+                        <th>Actions</th>
                         {{-- <th>Actions</th> --}}
                     </thead>
                     <tbody>
@@ -31,9 +32,9 @@
                                     <td>{{ $item->subject_2 ?? 'nothing' }}</td>
                                     <td>{{ $item->subject_3 ?? 'nothing' }}</td>
                                 @endforeach
-                                {{-- <td> --}}
-                            {{-- <a href="{{route('categories.edit', $category->id )}}" class="btn btn-primary">Edit</a>
-                            <form action="{{route('categories.destroy', $category->id)}}" method="POST" style="display: inline-block">
+                            <td>
+                            <a href="{{route('teacher.edit', $teacher->id )}}" class="btn btn-primary">Edit</a>
+                            {{-- <form action="{{route('categories.destroy', $category->id)}}" method="POST" style="display: inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -42,8 +43,8 @@
                                 @method('PUT')
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Change to {{$category->category_status  == 'disabled' ? 'active' : 'Disabild' }}</button>
-                            </form>
-                            </td> --}}
+                            </form> --}}
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

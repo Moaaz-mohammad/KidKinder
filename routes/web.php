@@ -54,6 +54,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function(){
     // Dashboard //
     Route::get('dashboard/home/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard/user/profile', [DashboardController::class, 'user_profile'])->name('UserProfile');
      //- Classes Controller
     Route::resource('dashboard/class', ClasssController::class);
     Route::resource('dashboard/teacher', TeacherController::class);

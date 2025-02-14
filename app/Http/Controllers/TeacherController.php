@@ -84,7 +84,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        return view('dashboard.teachers.edit', compact('teacher'));
     }
 
     /**
