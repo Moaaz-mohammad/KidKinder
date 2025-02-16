@@ -306,6 +306,7 @@
       <section class="content p-4">
         {{-- Test The slot components alert --}}
         {{-- <x-alert>Hi</x-alert> --}}
+        @include('alert')
         
         @yield('content')
       </section>

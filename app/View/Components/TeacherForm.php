@@ -14,11 +14,15 @@ class TeacherForm extends Component
 
     public $action;
     public $buttonText;
+    public $method;
+    public $teacher;
 
-    public function __construct($action, $buttonText = 'Submit')
+    public function __construct($action, $buttonText = 'Submit', $method = '', $teacher = null)
     {
         $this->action = $action;
         $this->buttonText = $buttonText;
+        $this->method = $method;
+        $this->teacher = $teacher;
     }
 
     /**

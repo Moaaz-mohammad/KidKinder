@@ -27,11 +27,9 @@
                             {{-- @dd($teacher->teachingContents->subject_1) --}}
                             <td>{{$teacher->id}}</td>
                             <td>{{$teacher->name}}</td>
-                                @foreach ($teacher->teachingContents as $item)
-                                    <td>{{ $item->subject_1 ?? 'nothing'}}</td>
-                                    <td>{{ $item->subject_2 ?? 'nothing' }}</td>
-                                    <td>{{ $item->subject_3 ?? 'nothing' }}</td>
-                                @endforeach
+                                @for ($i = 1; $i <=3 ; $i++)
+                                    <td>{{ $teacher->teachingContents->first()->{'subject_'.$i} ?? 'No Subject' }}</td>
+                                @endfor
                             <td>
                             <a href="{{route('teacher.edit', $teacher->id )}}" class="btn btn-primary">Edit</a>
                             {{-- <form action="{{route('categories.destroy', $category->id)}}" method="POST" style="display: inline-block">
@@ -54,7 +52,7 @@
                         <th>Subject</th>
                         <th>Subject</th>
                         <th>Subject</th>
-                        {{-- <th>Actions</th> --}}
+                        <th>Actions</th>
                     </tfoot>
                 </table>
                 </div>

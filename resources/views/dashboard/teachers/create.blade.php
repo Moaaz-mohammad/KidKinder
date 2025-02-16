@@ -10,7 +10,7 @@
         <!-- /.card-header -->
         <!-- form start -->
         {{-- After --}}
-        <x-teacher-form buttomText="Submit" action="{{route('teacher.store')}}">
+        <x-teacher-form buttomText="Submit" action="{{route('teacher.store')}}" method='POST'>
 
         </x-teacher-form>
 

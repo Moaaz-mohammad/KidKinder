@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
@@ -44,6 +45,9 @@ class TeacherController extends Controller
 
         $teacher = Teacher::create([
             'name' => $data['name'],
+            'url_1' => $request->url_1,
+            'url_2' => $request->url_2,
+            'url_3' => $request->url_3,
             'main_techer' => 'known',
             'description' => $data['description'] ?? null,
         ]);
@@ -92,7 +96,60 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        //dd( $request->all());
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'subject_1' => 'required|string',
+            'subject_2' => 'nullable|string',
+            'subject_3' => 'nullable|string',
+            'url_1' => 'nullable|url',
+            'url_2' => 'nullable|url',
+            'url_3' => 'nullable|url',
+            'description' => 'nullable|string',
+            'TeacherPhoto' => 'image|max:2048',
+        ]);
+
+        // $tescher = Teacher::findOrFail($request->id);
+
+        $teacher->update([
+            'name' => $request->name,
+            'url_1' => $request->url_1,
+            'url_2' => $request->url_2,
+            'url_3' => $request->url_3,
+            'main_techer' => "known",
+            'description' => $request->description,
+        ]);
+
+        $teacher->teachingContents()->update([
+            'subject_1' => $data['subject_1'],
+            'subject_2' => $data['subject_2'],
+            'subject_3' => $data['subject_3'],
+        ]);
+
+        if ($request->hasFile('TeacherPhoto')) {
+
+            $TeacherPhoto = $request->file('TeacherPhoto');
+
+            $PhotoName = time() . '.' . $TeacherPhoto->extension();
+
+            $TeacherPhoto->storeAs('public/images/' . $PhotoName);
+
+            if ($teacher->images()->exists()) {
+                $oldPhoto = $teacher->images()->first();
+                Storage::delete('public/images/' . $oldPhoto->file_name);
+
+                $oldPhoto->delete();
+            }
+
+            $teacher->images()->create([
+                'file_path' => 'storage/images/' . $PhotoName,
+                'file_name' => $PhotoName,
+            ]);
+        }
+
+
+        return redirect()->route('teacher.index')->with('success', 'Teacher Updated Successfully');
+
     }
 
     /**
