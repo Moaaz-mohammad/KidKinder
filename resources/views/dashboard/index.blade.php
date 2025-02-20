@@ -64,7 +64,7 @@
                       </div>
                       <div class="widget-user-image"> {{-- no-repeat center center--}}
                         @if ($student->images()->count() > 0)
-                        <img class="img-circle elevation-2" src="{{asset($student->images()->first()->file_path)}}" alt="User Avatar">
+                        <img class="img-circle elevation-2"  style="width: 100px; height: 100px;  object-fit: cover;" src="{{asset($student->images()->first()->file_path)}}" alt="User Avatar">
                         @else
                           <img src="" alt="No Photo">
                         @endif

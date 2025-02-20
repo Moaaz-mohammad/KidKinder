@@ -84,7 +84,8 @@ class studentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $student = Student::find($id);
+        return view('dashboard.students.edit', compact('student'));
     }
 
     /**
@@ -92,7 +93,50 @@ class studentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $data = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'student_forign_id' => 'required|string|max:255',
+            'age' => 'required',
+            'description' => 'nullable|string',
+            'image' => 'image|max:2048'
+        ]);
+
+        $student = Student::find($id);
+        // dd($data);
+
+        $student->update([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'student_forign_id' => $data['student_forign_id'],
+            'age' => $data['age'],
+            'description' => ['description']
+        ]);
+
+        if ($request->hasFile('image')) {
+            
+            $studentImage = $request->file('image');
+
+            $imageName = time() . '.' . $studentImage->extension();
+
+            $studentImage->storeAs('public/images/' . $imageName);
+
+            if ($student->images()->exists()) {
+                $oldImage = $student->images()->first();
+
+                Storage::delete('public/images/' . $oldImage->file_name);
+
+                $oldImage->delete();
+            }
+
+            $student->images()->create([
+                'file_path' => 'storage/images/'. $imageName,
+                'file_name' => $imageName ,
+            ]);
+        }
+
+        return redirect()->route('student.index')->with('success', 'Student Add Successfully');
     }
 
     /**
