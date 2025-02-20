@@ -3,7 +3,6 @@
 @section('page-title', 'Students')
 
 @section('content')
-    @include('alert')
         <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -18,6 +17,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>The Age</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                     @foreach ($students as $student)
@@ -26,19 +26,19 @@
                             <td>{{$student->first_name}}</td>
                             <td>{{$student->last_name}}</td>
                             <td>{{$student->age}}</td>
-                            {{-- <td>
-                                <a href="{{route('categories.edit', $category->id )}}" class="btn btn-primary">Edit</a>
-                                <form action="{{route('categories.destroy', $category->id)}}" method="POST" style="display: inline-block">
+                            <td>
+                                <a href="{{route('student.edit', $student->id )}}" class="btn btn-primary">Edit</a>
+                                {{-- <form action="{{route('categories.destroy', $category->id)}}" method="POST" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                                <form action="{{route('category.status.update', $category->id )}}" class="d-inline" method="POST">
+                                </form> --}}
+                                {{-- <form action="{{route('category.status.update', $category->id )}}" class="d-inline" method="POST">
                                     @method('PUT')
                                     @csrf
                                     <button type="submit" class="btn btn-primary">Change to {{$category->category_status  == 'disabled' ? 'active' : 'Disabild' }}</button>
-                                </form>
-                            </td> --}}
+                                </form> --}}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -47,6 +47,7 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>The Age</th>
+                        <th>Action</th>
                     </tfoot>
                 </table>
                 </div>
