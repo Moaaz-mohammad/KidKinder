@@ -40,6 +40,6 @@
         
         <!-- /.card-body -->
         <div class="card-footer ">
-        <button type="submit" class="btn btn-{{$method == 'PUT' ? 'info' : 'success'}}">{{$method == 'PUT' ? 'Edit' : 'Submit'}}</button>
+        <button type="submit" class="btn btn-{{$method == 'PUT' ? 'info' : 'success'}}">{{$method == 'PUT' ? 'Update' : 'Submit'}}</button>
         </div>
     </form>

@@ -10,7 +10,7 @@
         <div class="card-header">
             <h3 class="card-title">Edit: {{$teacher->name}}</h3>
         </div>
-        <x-teacher-form :teacher="$teacher" buttonText="Edit" action="{{route('teacher.update', $teacher->id)}}" method='PUT'>
+        <x-teacher-form :teacher="$teacher" buttonText="Update" action="{{route('teacher.update', $teacher->id)}}" method='PUT'>
           
         </x-teacher-form>
       </div>
