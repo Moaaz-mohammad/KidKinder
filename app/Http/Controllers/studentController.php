@@ -144,6 +144,20 @@ class studentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = Student::find($id);
+
+        if (!$student) {
+            return back()->with('error', 'Student Not Found');
+        }
+
+        if ($student->images()->exists()) {
+            foreach($student->images as $image) {
+                Storage::delete('public/images/' . $image->file_name);
+                $image->delete();
+            }
+        }
+        $student->delete();
+
+        return back()->with('success', 'Student Deleted Successfully');
     }
 }

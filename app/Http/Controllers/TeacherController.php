@@ -157,6 +157,20 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+    
+        if (!$teacher) {
+            return back()->with('error', 'Teacher Not Found');
+        }
+
+        if ($teacher->images()->exists()) {
+            foreach ($teacher->images as $image) {
+                Storage::delete('public/images/'. $image->file_name);
+                $image->delete();
+            }
+        }
+
+        $teacher->delete();
+
+        return back()->with('success', 'Teacher Deleted Sucessfully');
     }
 }
