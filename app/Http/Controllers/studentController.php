@@ -76,7 +76,8 @@ class studentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        return view('dashboard.students.show', compact('student'));
     }
 
     /**
@@ -111,7 +112,7 @@ class studentController extends Controller
             'last_name' => $data['last_name'],
             'student_forign_id' => $data['student_forign_id'],
             'age' => $data['age'],
-            'description' => ['description']
+            'description' => $data['description']
         ]);
 
         if ($request->hasFile('image')) {

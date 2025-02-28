@@ -14,7 +14,7 @@ class Student extends Model
 
     public function classses() {
         // return $this->belongsToMany(Classs::class;
-        return $this->belongsToMany(Classs::class, 'classroom_student', 'classroom_id', 'student_id') 
+        return $this->belongsToMany(Classs::class, 'classroom_student', 'student_id', 'classroom_id') 
         ->withPivot('joined_at') 
         ->withTimestamps();
     }

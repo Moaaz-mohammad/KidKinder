@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <h3>All Students</h3>
                 </div>
-                <div class="card-body text-center">
+                <div class="card-body">
                     <table id="categories-table" class="table">
                         <thead>
                             <th>ID</th>
@@ -27,17 +27,13 @@
                                 <td>{{$student->last_name}}</td>
                                 <td>{{$student->age}}</td>
                                 <td>
-                                    <a href="{{route('student.edit', $student->id )}}" class="btn btn-primary mx-2">Edit</a>
+                                    <a href="{{route('student.edit', $student->id )}}" class="btn btn-primary">Edit</a>
                                     <form action="{{route('student.destroy', $student->id)}}" method="POST" style="display: inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger mx-2">Delete</button>
                                     </form>
-                                    {{-- <form action="{{route('category.status.update', $category->id )}}" class="d-inline" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary">Change to {{$category->category_status  == 'disabled' ? 'active' : 'Disabild' }}</button>
-                                    </form> --}}
+                                    <a href="{{route('student.show', $student->id)}}" class="btn btn-info">Show {{$student->first_name}} Details</a>
                                 </td>
                             </tr>
                         @endforeach
