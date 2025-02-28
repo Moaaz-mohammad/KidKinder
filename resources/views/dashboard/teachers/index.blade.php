@@ -36,6 +36,7 @@
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit">DELETE</button>
                                         </form>
+                                        <a href="{{route('teacher.show', $teacher->id)}}" class="btn btn-info">Show</a>
                                     </td>
                                 </tr>
                                 @endforeach
