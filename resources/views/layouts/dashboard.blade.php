@@ -288,7 +288,7 @@
                   <li class="nav-item">
                     <a href="{{route('class.create')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Create</p>
+                      <p>Create Class</p>
                     </a>
                   </li>
                 </ul>
@@ -384,6 +384,16 @@
 @yield('js')
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = localStorage.getItem('success');
+        if (message) {
+          const aler = document.getElementById('success-alert');
+          aler.innerText  = message;
+          aler.classList.remove('d-none');
+          localStorage.removeItem('success');
+        }
+    });
+
     $(document).ready(function () {
       $('.alert-action').delay(2000).fadeOut(2000);
     })

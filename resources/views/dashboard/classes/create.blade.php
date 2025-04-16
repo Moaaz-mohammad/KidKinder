@@ -6,7 +6,7 @@
   <div class="col-lg-6">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Make Class</h3>
+        <h3 class="card-title">Create Class</h3>
       </div>
       <!-- /.card-header -->
       <!-- form start -->
@@ -190,7 +190,6 @@
                               </div>
                               <div class="col-lg-3">
                                 <p>Age : <span>{{$student->age}} Year</span></p>
-
                                 {{-- <button type="button" class="btn btn-block btn-outline-success btn-flat text-bold" disabled>Add</button> --}}
                               </div>
                               <div class="col-lg-3">
@@ -232,11 +231,12 @@
     </div>
     
   </div>
-  <button type="submit" onclick="submitForms()" class="btn btn-block btn-outline-success btn-lg text-bold mt-2 mx-5">Add Every Thing</button>
+  <button type="submit" onclick="submitForms()" class="btn btn-block btn-outline-success btn-lg text-bold mt-2 mx-5">Add Everything</button>
 </div>
 @endsection
 
 @section('js')
+
     <script>
 
       function submitForms() {
@@ -254,16 +254,16 @@
         // formData2.forEach((value, key) => mergedData[key] = value);
 
         formData2.forEach((value, key) => {
-        if (key.endsWith("[]")) {
-            key = key.replace("[]", "");
-            if (!mergedData[key]) {
-                mergedData[key] = [];
-            }
-            mergedData[key].push(value);
-        } else {
-            mergedData[key] = value;
-        }
-    });
+            if (key.endsWith("[]")) {
+              key = key.replace("[]", "");
+              if (!mergedData[key]) {
+                  mergedData[key] = [];
+              }
+              mergedData[key].push(value);
+            } else {
+                mergedData[key] = value;
+          }
+        });
 
         // console.log(mergedData);
         fetch("{{ route('class.store') }}", {
@@ -280,7 +280,11 @@
           console.log(data);
           window.location.href = "{{route('class.index')}}";
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+        })
       } 
+  
     </script>
+
 @endsection

@@ -7,7 +7,7 @@
       <div class="col-lg-4">
         <div class="card" style="width: 30rem;">
           <div class="card-body">
-            <h5 class="card-title text-primary" style="font-size: 2rem;">Student Details: </h5>
+            <h5 class="card-title text-primary" style="font-size: 2rem;">Teacher Details: </h5>
             {{-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
             <p class="card-text"></p> --}}
           </div>

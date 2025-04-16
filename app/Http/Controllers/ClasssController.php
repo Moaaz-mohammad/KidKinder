@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Classs;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClasssController extends Controller
 {
@@ -23,7 +25,7 @@ class ClasssController extends Controller
     public function create()
     {
         $students = Student::all();
-        return view('dashboard.classes.create', compact('students'));
+        return view('dashboard.classes.make', compact('students'));
     }
 
     /**
@@ -32,8 +34,13 @@ class ClasssController extends Controller
     public function store(Request $request)
     {
 
-        $vaeldateData = $request->validate ([
-            'Check' => 'required|array',
+        $request->merge([
+            'from_time' => substr($request->from_time, 0 , 5),
+            'to' => substr($request->to, 0 , 5)
+        ]);
+
+        $validator = Validator::make($request->all(),[
+            'Check' => 'array',
             'class_content_name' => 'required|string|max:255',
             'class_number' => 'required|integer',
             'from_age' => 'nullable|integer|min:1',
@@ -45,26 +52,46 @@ class ClasssController extends Controller
             'description' => 'required|string',
         ]);
 
-        // return date('H:i:s',strtotime('10:00PM'));
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        $from_time = date('H:i:s', strtotime($vaeldateData['from_time']));
-        $to_time = date('H:i:s', strtotime($vaeldateData['to']));
+
+        // Time Transformation and i do not need it i was need them //
+        // return date('H:i:s',strtotime('10:00PM'));
+        // $from_time = date('H:i:s', strtotime($request->from_time));
+        // $to_time = date('H:i:s', strtotime($request->to));
 
         $class = Classs::create([
-            'class_content_name' => $vaeldateData['class_content_name'],
-            'class_number' => $vaeldateData['class_number'],
-            'from_age' => $vaeldateData['from_age'],
-            'to_age' => $vaeldateData['to_age'],
-            'total_seats' => $vaeldateData['total_seats'],
-            'tution_fee' => $vaeldateData['tution_fee'],
-            'from_time' => $from_time,
-            'to' => $to_time,
-            'description' => $vaeldateData['description'],
+            'class_content_name' => $request->class_content_name,
+            'class_number' => $request->class_number,
+            'from_age' => $request->from_age,
+            'to_age' => $request->to_age,
+            'total_seats' => $request->total_seats,
+            'tution_fee' => $request->tution_fee,
+            'from_time' => $request->from_time,
+            'to' => $request->to,
+            'description' => $request->description,
         ]);
 
-        $class->students()->attach($request->Check, ['joined_at' => now()]);
+        if (!empty($request->Check)) {
+            $studentsIds = $request->Check;
+            $pivotData = [];
 
-        return response()->json(['message' => "Done" . $request]);
+            foreach ($studentsIds as $id) {
+                $pivotData[$id] = ['joined_at' => now()];
+            }
+
+            $class->students()->attach($pivotData);
+        }
+
+
+        return response()->json([
+        'success' => true,
+        'message' => 'Class information saved successfully.'
+    ]);
 
         // return redirect()->route('class.index')->with('success', 'Class information saved successfully.');
         
@@ -73,17 +100,24 @@ class ClasssController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Classs $classs)
+    public function show(Classs $classs, Request $request)
     {
-        //
+        if (!$request->class) {
+            return redirect()->back()->with('error', 'Class Not Found');
+        }
+        $class = Classs::find($request->class);
+        return view('dashboard.classes.show', compact('class'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Classs $classs)
+    public function edit(Classs $classs, Request $request)
     {
-        //
+        $class = Classs::find($request->class_id);
+        $students = Student::all();
+        $classStudents = $class->students->pluck('id')->toArray();
+        return view('dashboard.classes.edit', compact('class', 'students', 'classStudents'));
     }
 
     /**
@@ -91,14 +125,80 @@ class ClasssController extends Controller
      */
     public function update(Request $request, Classs $classs)
     {
-        //
+        $request->merge([
+            'from_time' => substr($request->from_time, 0, 5),
+            'to' => substr($request->to, 0, 5),
+        ]);
+
+        $classId = $request->classId;
+
+        $class = Classs::find($classId);
+
+        $validateData = Validator::make($request->all(), [
+            'Check' => 'array',
+            'class_content_name' => 'string|max:255',
+            'class_number' => 'integer',
+            'from_age' => 'integer|min:1',
+            'to_age' => 'integer|min:1|gte:from_age',
+            'total_seats' => 'integer|min:1',
+            'tution_fee' => 'numeric|min:0',
+            'from_time' => 'date_format:H:i:s,H:i|before:to',
+            'to' => 'date_format:H:i:s,H:i|after:from_time',
+            'description' => 'string'
+        ]);
+
+        if ($validateData->fails()) {
+            return response()->json([
+                'errors' => $validateData->errors()
+            ], 422); // Status code 422 for validation errors
+        }
+        
+        
+        $class->update([
+            'class_content_name' => $request->class_content_name,
+            'class_number' => $request->class_number,
+            'from_age' => $request->from_age,
+            'to_age' => $request->to_age,
+            'total_seats' => $request->total_seats,
+            'tution_fee' => $request->tution_fee,
+            'from_time' => $request->from_time,
+            'to' => $request->to,
+            'description' => $request->description
+        ]);
+
+        // Frist Way -----------
+        $class->students()->sync($request->Check ?? []);
+
+        // Secound Way -------
+        // if (count($request->Check) <= 1) {
+        //     $class->students()->sync($request->Check);
+        // }else {
+        //     $class->students()->detach();
+        // }
+        
+        return response()->json([
+            'success' => true,
+            "message" => 'Class Updated Successfully'
+        ]);
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classs $classs)
+    public function destroy(Classs $classs, Request $request)
     {
-        //
+        $classId = $request->input('class_id');
+
+        $class = Classs::find($classId);
+
+        if (!$class) {
+            return redirect()->back()->with('error', 'Class Not Found');
+        }
+
+        $class->delete();
+
+        return redirect()->back()->with('success', 'Class Deleted Successfully');
     }
 }

@@ -4,6 +4,9 @@
 </div>
 @endif
 
+<div id="success-alert" class="alert alert-success alert-action d-none"></div>
+
+
 @if(!empty(session('error')))
 <div class="alert alert-danger alert-action" role="alert">
     {{ session('error') }}
