@@ -2,7 +2,7 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-    <h1>Welcome</h1>
+    <h1>Overview</h1>
     <div class="card">
       <div class="card-header ui-sortable-handle" style="cursor: movee;">
         <h3 class="card-title">
@@ -27,7 +27,7 @@
         <div class="tab-content p-0">
           <!-- Morris chart - Sales -->
           <div class="chart tab-pane active" id="revenue-chart" style="position: relative;">
-            H1
+            Nothing Yet
           </div>
           <div class="chart tab-pane " id="sales-chart" style="position: relative;">
             <div class="col-12 col-sm-6 col-md-2">
@@ -35,7 +35,7 @@
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Students Count</span>
-                  <span class="info-box-number">{{$studentsCount}}</span>
+                  <span class="info-box-number">{{$studentsCount > 0 ? $studentsCount : 0}}</span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -51,65 +51,69 @@
                 </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body p-2">
-                <div class="row">
-                  @foreach ($students as $student)
-                  <div class="col-md-4">
-                    <!-- Widget: user widget style 1 -->
-                    <div class="card card-widget widget-user">
-                      <!-- Add the bg color to the header using any of the bg-* classes -->
-                      <div class="widget-user-header bg-info" style="background: url( {{asset('dashboard/dist/img/Student_home_background.jpg')}} ) no-repeat center center; background-size: cover;">
-                        {{-- <h3 class="widget-user-username">{{$student->first_name}}</h3> --}}
-                        {{-- <h5 class="widget-user-desc">{{$student->student_forign_id}}</h5> --}}
-                      </div>
-                      <div class="widget-user-image"> {{-- no-repeat center center--}}
-                        @if ($student->images()->count() > 0)
-                        <img class="img-circle elevation-2"  style="width: 100px; height: 100px;  object-fit: cover;" src="{{asset($student->images()->first()->file_path)}}" alt="User Avatar">
-                        @else
-                          <img src="" alt="No Photo">
-                        @endif
-                      </div>
-                      <div class="card-footer">
-                        <div class="row">
-                          <div class="col-sm-4 border-right">
-                            <div class="description-block">
-                              <h5 class="description-header">{{$student->student_forign_id}}</h5>
-                              <span class="description-text">Student Number</span>
+              @if (count($students) > 0)
+                <div class="card-body p-2">
+                  <div class="row">
+                      @foreach ($students as $student)
+                        <div class="col-md-4">
+                          <!-- Widget: user widget style 1 -->
+                          <div class="card card-widget widget-user">
+                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                            <div class="widget-user-header bg-info" style="background: url( {{asset('dashboard/dist/img/Student_home_background.jpg')}} ) no-repeat center center; background-size: cover;">
+                              {{-- <h3 class="widget-user-username">{{$student->first_name}}</h3> --}}
+                              {{-- <h5 class="widget-user-desc">{{$student->student_forign_id}}</h5> --}}
                             </div>
-                            <!-- /.description-block -->
-                          </div>
-                          <!-- /.col -->
-                          <div class="col-sm-4 border-right">
-                            <div class="description-block mt-4">
-                              <h5 class="description-header">{{$student->first_name}}</h5>
-                              <span class="description-text">Student Name</span>
+                            <div class="widget-user-image"> {{-- no-repeat center center--}}
+                              @if ($student->images()->count() > 0)
+                              <img class="img-circle elevation-2"  style="width: 100px; height: 100px;  object-fit: cover;" src="{{asset($student->images()->first()->file_path)}}" alt="User Avatar">
+                              @else
+                                <img src="" alt="No Photo">
+                              @endif
                             </div>
-                            <!-- /.description-block -->
-                          </div>
-                          <!-- /.col -->
-                          <div class="col-sm-4">
-                            <div class="description-block">
-                              <h5 class="description-header">35</h5>
-                              <span class="description-text">Student Age</span>
+                            <div class="card-footer">
+                              <div class="row">
+                                <div class="col-sm-4 border-right">
+                                  <div class="description-block">
+                                    <h5 class="description-header">{{$student->student_forign_id}}</h5>
+                                    <span class="description-text">Student Number</span>
+                                  </div>
+                                  <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 border-right">
+                                  <div class="description-block mt-4">
+                                    <h5 class="description-header">{{$student->first_name}}</h5>
+                                    <span class="description-text">Student Name</span>
+                                  </div>
+                                  <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4">
+                                  <div class="description-block">
+                                    <h5 class="description-header">35</h5>
+                                    <span class="description-text">Student Age</span>
+                                  </div>
+                                  <!-- /.description-block -->
+                                </div>
+                                <!-- /.col -->
+                              </div>
+                              <!-- /.row -->
                             </div>
-                            <!-- /.description-block -->
                           </div>
-                          <!-- /.col -->
+                          <!-- /.widget-user -->
                         </div>
-                        <!-- /.row -->
-                      </div>
-                    </div>
-                    <!-- /.widget-user -->
+                      @endforeach
                   </div>
-                  @endforeach
+                  <!-- /.users-list -->
                 </div>
-                <!-- /.users-list -->
-              </div>
+              @endif
+              
               <!-- /.card-body -->
             </div>
           </div>
           <div class="chart tab-pane" id="classes" style="position: relative;">
-            <div class="card">
+            Nothing Yet
+            {{-- <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Class Name</h3>
               <div class="card-tools">
@@ -130,7 +134,7 @@
                 <!-- /.users-list -->
               </div>
               <!-- /.card-body -->
-            </div>
+            </div> --}}
           </div>
         </div>
       </div><!-- /.card-body -->
