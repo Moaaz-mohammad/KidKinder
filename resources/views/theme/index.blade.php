@@ -198,46 +198,48 @@
           <h1 class="mb-4">Classes for Your Kids</h1>
         </div>
         <div class="row">
-          @foreach ($clsses->take(3) as $class)
-            <div class="col-lg-4 mb-5">
-              <div class="card border-0 bg-light shadow-sm pb-2">
-                <img class="card-img-top mb-2" src="img/class-1.jpg" alt="" />
-                <div class="card-body text-center">
-                  <h4 class="card-title">{{$class->class_content_name}}</h4>
-                  <p class="card-text">
-                    {{$class->description}}
-                  </p>
+          @if (count($clsses) > 0)
+            @foreach ($clsses->take(3) as $class)
+              <div class="col-lg-4 mb-5">
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                  <img class="card-img-top mb-2" src="img/class-1.jpg" alt="" />
+                  <div class="card-body text-center">
+                    <h4 class="card-title">{{$class->class_content_name}}</h4>
+                    <p class="card-text">
+                      {{$class->description}}
+                    </p>
+                  </div>
+                  <div class="card-footer bg-transparent py-4 px-5">
+                    <div class="row border-bottom">
+                      <div class="col-6 py-1 text-right border-right">
+                        <strong>Age of Kids</strong>
+                      </div>
+                      <div class="col-6 py-1">{{$class->from_age}} - {{$class->to_age}} Years</div>
+                    </div>
+                    <div class="row border-bottom">
+                      <div class="col-6 py-1 text-right border-right">
+                        <strong>Total Seats</strong>
+                      </div>
+                      <div class="col-6 py-1">{{$class->total_seats}} Seats</div>
+                    </div>
+                    <div class="row border-bottom justify-content-center align-items-center">
+                      <div class="col-4 py-0 text-right border-right">
+                        <strong>Class Time</strong>
+                      </div>
+                      <div class="col-8 py-1">{{$class->from_time}} - {{$class->to}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 py-1 text-right border-right">
+                        <strong>Tution Fee</strong>
+                      </div>
+                      <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
+                    </div>
+                  </div>
+                  <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
                 </div>
-                <div class="card-footer bg-transparent py-4 px-5">
-                  <div class="row border-bottom">
-                    <div class="col-6 py-1 text-right border-right">
-                      <strong>Age of Kids</strong>
-                    </div>
-                    <div class="col-6 py-1">{{$class->from_age}} - {{$class->to_age}} Years</div>
-                  </div>
-                  <div class="row border-bottom">
-                    <div class="col-6 py-1 text-right border-right">
-                      <strong>Total Seats</strong>
-                    </div>
-                    <div class="col-6 py-1">{{$class->total_seats}} Seats</div>
-                  </div>
-                  <div class="row border-bottom justify-content-center align-items-center">
-                    <div class="col-4 py-0 text-right border-right">
-                      <strong>Class Time</strong>
-                    </div>
-                    <div class="col-8 py-1">{{$class->from_time}} - {{$class->to}}</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 py-1 text-right border-right">
-                      <strong>Tution Fee</strong>
-                    </div>
-                    <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
-                  </div>
-                </div>
-                <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          @endif
         </div>
       </div>
     </div>
@@ -335,41 +337,43 @@
           <h1 class="mb-4">Meet Our Teachers</h1>
         </div>
         <div class="row">
-          @foreach ($teachers->take(4) as $teacher)
-            <div class="col-md-6 col-lg-3 text-center team mb-5">
-              <div
-                class="position-relative overflow-hidden mb-4"
-                style="border-radius: 100%"
-              >
-                @if ($teacher->images()->count() > 0)
-                  <img class="img-fluid w-100" style="width: 200px; height: 200px;  object-fit: cover;" src="{{asset($teacher->images()->first()->file_path)}}" alt="Photo" />
-                @endif
-                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                  {{-- <a
-                    class="btn btn-outline-light text-center mr-2 px-0"
-                    style="width: 38px; height: 38px"
-                    href="#"
-                    ><i class="fab fa-twitter"></i
-                    >
-                  </a> --}}
-                  {{-- <a
-                    class="btn btn-outline-light text-center mr-2 px-0"
-                    style="width: 38px; height: 38px"
-                    href="#"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a> --}}
-                  {{-- <a
-                    class="btn btn-outline-light text-center px-0"
-                    style="width: 38px; height: 38px"
-                    href="#"
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a> --}}
+          @if (count($teachers) > 0)
+            @foreach ($teachers->take(4) as $teacher)
+              <div class="col-md-6 col-lg-3 text-center team mb-5">
+                <div
+                  class="position-relative overflow-hidden mb-4"
+                  style="border-radius: 100%"
+                >
+                  @if ($teacher->images()->count() > 0)
+                    <img class="img-fluid w-100" style="width: 200px; height: 200px;  object-fit: cover;" src="{{asset($teacher->images()->first()->file_path)}}" alt="Photo" />
+                  @endif
+                  <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                    {{-- <a
+                      class="btn btn-outline-light text-center mr-2 px-0"
+                      style="width: 38px; height: 38px"
+                      href="#"
+                      ><i class="fab fa-twitter"></i
+                      >
+                    </a> --}}
+                    {{-- <a
+                      class="btn btn-outline-light text-center mr-2 px-0"
+                      style="width: 38px; height: 38px"
+                      href="#"
+                      ><i class="fab fa-facebook-f"></i
+                    ></a> --}}
+                    {{-- <a
+                      class="btn btn-outline-light text-center px-0"
+                      style="width: 38px; height: 38px"
+                      href="#"
+                      ><i class="fab fa-linkedin-in"></i
+                    ></a> --}}
+                  </div>
                 </div>
+                <h4>{{$teacher->name}}</h4>
+                <i>{{$teacher->teachingContents()->first()->subject_1}}</i>
               </div>
-              <h4>{{$teacher->name}}</h4>
-              <i>{{$teacher->teachingContents()->first()->subject_1}}</i>
-            </div>
-          @endforeach
+            @endforeach
+          @endif
         </div>
       </div>
     </div>
