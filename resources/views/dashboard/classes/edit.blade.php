@@ -25,28 +25,30 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                  @foreach ($students as $student)
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">  <!-- 3 columns on large screens, 2 on medium, and 1 on small screens -->
-                      <div class="callout callout-success">
-                        <div class="row">
-                          <div class="col-6">
-                            <h5>{{ $student->first_name . ' ' . $student->last_name }}</h5>
-                            <p>Student No: <span>{{ $student->student_forign_id }}</span></p>
-                          </div>
-                          <div class="col-3">
-                            <p>Age: <span>{{ $student->age }} Year</span></p>
-                          </div>
-                          <div class="col-3">
-                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                <input type="checkbox" name="Check[]" value="{{ $student->id }}" class="custom-control-input" id="customSwitch{{ $student->id }}" 
-                                      @if(in_array($student->id, $classStudents)) checked @endif>
-                                <label class="custom-control-label" for="customSwitch{{ $student->id }}">Add</label>
+                  @if (count($students) > 0)
+                    @foreach ($students as $student)
+                      <div class="col-lg-4 col-md-6 col-sm-12 mb-4">  <!-- 3 columns on large screens, 2 on medium, and 1 on small screens -->
+                        <div class="callout callout-success">
+                          <div class="row">
+                            <div class="col-6">
+                              <h5>{{ $student->first_name . ' ' . $student->last_name }}</h5>
+                              <p>Student No: <span>{{ $student->student_forign_id }}</span></p>
+                            </div>
+                            <div class="col-3">
+                              <p>Age: <span>{{ $student->age }} Year</span></p>
+                            </div>
+                            <div class="col-3">
+                              <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                  <input type="checkbox" name="Check[]" value="{{ $student->id }}" class="custom-control-input" id="customSwitch{{ $student->id }}" 
+                                        @if(in_array($student->id, $classStudents)) checked @endif>
+                                  <label class="custom-control-label" for="customSwitch{{ $student->id }}">Add</label>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  @endforeach
+                    @endforeach
+                  @endif
                 </div>
               </form>
             </div>
