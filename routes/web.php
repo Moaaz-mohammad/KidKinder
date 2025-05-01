@@ -55,11 +55,15 @@ Route::middleware(['auth'])->group(function(){
     // Dashboard //
     Route::get('dashboard/home/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/user/profile', [DashboardController::class, 'user_profile'])->name('UserProfile');
+    Route::put('dashboard/user/profile/{id}/edit', [DashboardController::class, 'Update'])->name('user.edit');
+    Route::post('dashboard/user/password/{id}/edit', [DashboardController::class, 'updatePassword'])->name('user.password.edit');
+    Route::delete('dashboard/user/photo/{id}/remove', [DashboardController::class, 'removePhoto'])->name('user.photo.remove');
      //- Classes Controller
     Route::resource('dashboard/class', ClasssController::class);
     Route::resource('dashboard/teacher', TeacherController::class);
     Route::resource('dashboard/student', studentController::class);
-
+    //- View Blade 
+    Route::get('classes/{id}/join/', [ThemeController::class, 'joinClass'])->name('join.class');
 });
 
 

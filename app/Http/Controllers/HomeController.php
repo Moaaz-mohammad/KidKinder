@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classs;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('theme.index');
+        $clsses = Classs ::all();
+        $teachers = Teacher::all();
+        return view('theme.index', compact('clsses', 'teachers'));
     }
 }

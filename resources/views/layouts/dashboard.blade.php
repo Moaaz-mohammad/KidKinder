@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> @yield('page-title') </title>
-
+  {{-- Bootstrap --}}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -64,13 +65,26 @@
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
+    @php
+      $image = Auth::user()->images()->first();
+    @endphp
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
         <div class="image">
-          <img src="{{asset('dashboard/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+
+          {{-- Updated Code  --}}
+          <img src="{{$image ? asset($image->file_path) : asset('dashboard/dist/img/NoPhoto.jpg')}}" class="img-circle elevation-2" style="width: 50px; height: 50px;  object-fit: cover;" alt="User Image">
+
+
+
+          {{-- Past Code For Review --}}
+          {{-- @if ($image)
+            <img src="{{asset($image->file_path)}}" class="img-circle elevation-2" style="width: 50px; height: 50px;  object-fit: cover;" alt="User Image">
+          @else
+            <img src="{{asset('dashboard/dist/img/NoPhoto.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          @endif --}}
         </div>
         <div class="info">
           <a href="{{route('UserProfile')}}" class="d-block">{{Auth()->check() ? Auth::user()->name : ''}}</a>
@@ -203,8 +217,9 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
-<!-- Bootstrap 4 -->
+<!-- Bootstrap 4, 5 -->
 <script src="{{asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{asset('dashboard/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -242,6 +257,7 @@
 <script src="{{asset('dashboard/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dashboard/dist/js/pages/dashboard.js')}}"></script>
+
 @yield('js')
 
 <script>
@@ -256,7 +272,7 @@
     });
 
     $(document).ready(function () {
-      $('.alert-action').delay(2000).fadeOut(2000);
+      $('.alert-action').delay(3000).fadeOut(2500);
     })
   </script>
 </script>

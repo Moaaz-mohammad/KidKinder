@@ -68,7 +68,22 @@
             </div> --}}
             <a href="{{route('ContactPage')}}" class="nav-item nav-link">Contact</a>
           </div>
-          <a href="{{route('dashboard')}}" class="btn btn-primary px-4">{{Auth::user() ? Auth::user()->name : 'Login'}}</a>
+          @auth
+          <div>
+            <a class=" btn btn-primary px-4" href="{{ route('logout') }}"
+            onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            {{-- this button just for me to change the view to admin --}}
+            <a href="{{route('dashboard')}}" class="btn btn-primary px-4">{{Auth::user()->name}}</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+          </div>
+          @else
+            <a href="{{route('login')}}" class="btn btn-primary px-4">Login</a>
+          @endauth
         </div>
       </nav>
     </div>
