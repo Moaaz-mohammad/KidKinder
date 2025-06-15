@@ -143,6 +143,13 @@ return [
         // 'store'  => 'redis',
     ],
 
+
+    'contact_email' => env('APP_EMAIL'),
+    'contact_phone' => env('APP_PHONE'),
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

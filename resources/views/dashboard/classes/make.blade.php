@@ -54,7 +54,7 @@
     </div>
   </div>
 </div>
-    <button type="submit" onclick="submitForms()" class="btn btn-block btn-outline-primary btn-lg text-bold mt-2 mx-5">Submit</button>
+    <button type="submit" onclick="submitForms()" class="btn btn-block btn-outline-primary btn-lg text-bold mt-2">Submit</button>
   </div>
 @endsection
 

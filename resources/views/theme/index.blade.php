@@ -199,7 +199,11 @@
         </div>
         <div class="row">
           @if (count($clsses) > 0)
-            @foreach ($clsses->take(3) as $class)
+            @foreach ($clsses->take(6) as $class)
+                @php
+                  // $existsRequest = auth()->check() ? auth()->user()->classRequests()->where('class_id', $class->id)->whereIn('status', ['pending', 'approved'])->exists() : false;
+                  $hasExistsRequest = auth()->user()?->classRequests()->where('class_id', $class->id)->whereIn('status', ['pending', 'approved'])->exists() ?? false;
+                @endphp
               <div class="col-lg-4 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                   <img class="card-img-top mb-2" src="img/class-1.jpg" alt="" />
@@ -235,7 +239,7 @@
                       <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
                     </div>
                   </div>
-                  <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                  <a href="{{ $hasExistsRequest ? route('requests.index') : route('join.class', $class->id)}}" class="btn {{ $hasExistsRequest  ? 'btn-secondary disabled' : 'btn-primary' }} btn-primary px-4 mx-auto mb-4" @if ($hasExistsRequest) aria-disabled="true"  @endif>{{$hasExistsRequest ? 'Already Requested' : 'Join CLass' }}</a>
                 </div>
               </div>
             @endforeach

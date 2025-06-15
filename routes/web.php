@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminRequestController;
+use App\Http\Controllers\ClassRequestController;
 use App\Http\Controllers\ClasssController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\studentController;
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\SmartPunct\DashParser;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\Auth\VerificationController;
+use Psy\Output\Theme;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +28,14 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Auth::routes(['verify' => true]);
+
+Route::post('email/resend/message', [VerificationController::class, 'resend'])
+    ->name('verification.send')
+    ->middleware(['auth', 'throttle:6,1']);
+
+
 Route::get('/store', [ThemeController::class, 'index'])->name('store');
 
 Route::get('/', [ThemeController::class, 'index']);
@@ -51,7 +63,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'verified'])->group(function(){
     // Dashboard //
     Route::get('dashboard/home/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/user/profile', [DashboardController::class, 'user_profile'])->name('UserProfile');
@@ -62,18 +74,31 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('dashboard/class', ClasssController::class);
     Route::resource('dashboard/teacher', TeacherController::class);
     Route::resource('dashboard/student', studentController::class);
+    // Admin Requests Controller
+    Route::get('user/requests/list', [AdminRequestController::class, 'index'])->name('admin.requests.index');
+    Route::post('user/requests/{id}/approve', [AdminRequestController::class, 'approve'])->name('admin.requests.approve');
+    Route::post('user/requests/{id}/reject', [AdminRequestController::class, 'reject'])->name('admin.requests.reject');
+    Route::post('user/requests/{id}/pending', [AdminRequestController::class, 'pending'])->name('admin.requests.pending');
+    Route::get('user/{id}/requests/show', [AdminRequestController::class, 'show'])->name('admin.requests.show');
     //- View Blade 
     Route::get('classes/{id}/join/', [ThemeController::class, 'joinClass'])->name('join.class');
+    Route::post('class/join', [ClassRequestController::class, 'store'])->name('class.request.store');
+    Route::get('class/requests/view', [ClassRequestController::class, 'index'])->name('requests.index');
+    Route::get('class/{id}/request/show', [ClassRequestController::class, 'show'])->name('request.show');
+    // User Profile
+    Route::get('user/profile', [ThemeController::class, 'showProfile'])->name('userProfile');
+    Route::post('user/profile/{id}', [ThemeController::class, 'update'])->name('settingsUpdate');
 });
 
 
+// Route::moddleware(['auth', 'verified'])->group(function () {
+
+// });
 
 
 
-Auth::routes([
-    'verify' => true
-]);
 
 // Route::get('/', function () {
 
 // })->middleware(['auth', 'verified']);
+

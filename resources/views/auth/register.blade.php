@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -22,6 +22,30 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="last_name" class="col-md-4 col-form-label text-md-end">Last Name</label>
+
+                            <div class="col-lg-6">
+                                <input type="name" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="forign_id" class="col-md-4 col-form-label text-md-end">Forign ID</label>
+
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="forign_id" value="{{ old('forign_id') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="age" class="col-md-4 col-form-label text-md-end">Age</label>
+
+                            <div class="col-lg-6">
+                                <input type="number" class="form-control" id="age" name="age" value="{{old('age')}}" required>                    
                             </div>
                         </div>
 

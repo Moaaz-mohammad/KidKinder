@@ -4,22 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\Classs;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ThemeController extends Controller
 {
     public function index() {
-        $clsses = Classs::all();
+        $clsses = Classs::where('total_seats', '>', '0')->get();
         $teachers = Teacher::all();
         return view('theme.index', compact('clsses', 'teachers'));
     }
 
+    public function showProfile() {
+        $user = auth()->user();
+        
+        $requests = $user->classRequests->last()->get();
+
+        $totalRequests = $user->classRequests->count();
+        $approvedRequests = $user->classRequests->where('status', 'approved')->count();
+        $rejectedRequests = $user->classRequests->where('status', 'rejected')->count();
+        return view('theme.user-profile', compact('user', 'requests', 'totalRequests', 'approvedRequests', 'rejectedRequests'));
+    }
+
+    public function update(Request $request, $id) {
+        $user = User::findOrFail($id);
+
+        $validate = Validator::make($request->all(), [
+            'email' => 'string|max:255|email|unique:users,email,'. $id,
+            'password' => 'nullable|string|min:8|'
+        ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->with('error', $validate->errors());
+        }
+
+        if ($request->filled('password')) {
+            $user->update([
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+        }else {
+            $user->update([
+                'email' => $request->email
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Your account information has been updated successfully.');
+    }
     public function aboutPage() {
         return view('theme.about');
     }
 
     public function classesPage() {
-        $clsses = Classs::all();
+        $clsses = Classs::where('total_seats', '>', 0)->get();
         return view('theme.classes', compact('clsses'));
     }
 
@@ -52,4 +91,9 @@ class ThemeController extends Controller
 
     //     return view("theme.$page");
     // }
+
+    public function joinClass($id) {
+        $class = Classs::findOrFail($id);
+        return view('theme.join-class', compact('class'));
+    }
 }

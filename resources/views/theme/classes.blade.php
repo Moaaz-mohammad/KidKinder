@@ -31,6 +31,9 @@
         <div class="row">
           @if (count($clsses) > 0)
             @foreach ($clsses->take(6) as $class)
+            @php
+              $existsRequest = auth()->user()?->classRequests()->where('class_id', $class->id)->whereIn('status', ['pending', 'approved'])->first();
+            @endphp
               <div class="col-lg-4 mb-5">
                 <div class="card border-0 bg-light shadow-sm pb-2">
                   <img class="card-img-top mb-2" src="img/class-1.jpg" alt="" />
@@ -66,9 +69,47 @@
                       <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
                     </div>
                   </div>
-                  <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                  <a href="{{$existsRequest ? route('requests.index') : route('join.class', $class->id)}}" class="btn {{$existsRequest ? 'btn-secondary disabled' : "btn-primary"}} px-4 mx-auto mb-4" @if ($existsRequest) aria-disabled="true" @endif>{{$existsRequest ? 'Already Requested' : 'Join Class'}}</a>
                 </div>
               </div>
+              {{-- <div class="col-lg-4 mb-5">
+                <div class="card border-0 bg-light shadow-sm pb-2">
+                  <img class="card-img-top mb-2" src="img/class-1.jpg" alt="" />
+                  <div class="card-body text-center">
+                    <h4 class="card-title">{{$class->class_content_name}}</h4>
+                    <p class="card-text">
+                      {{$class->description}}
+                    </p>
+                  </div>
+                  <div class="card-footer bg-transparent py-4 px-5">
+                    <div class="row border-bottom">
+                      <div class="col-6 py-1 text-right border-right">
+                        <strong>Age of Kids</strong>
+                      </div>
+                      <div class="col-6 py-1">{{$class->from_age}} - {{$class->to_age}} Years</div>
+                    </div>
+                    <div class="row border-bottom">
+                      <div class="col-6 py-1 text-right border-right">
+                        <strong>Total Seats</strong>
+                      </div>
+                      <div class="col-6 py-1">{{$class->total_seats}} Seats</div>
+                    </div>
+                    <div class="row border-bottom justify-content-center align-items-center">
+                      <div class="col-4 py-0 text-right border-right">
+                        <strong>Class Time</strong>
+                      </div>
+                      <div class="col-8 py-1">{{$class->from_time}} - {{$class->to}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 py-1 text-right border-right">
+                        <strong>Tution Fee</strong>
+                      </div>
+                      <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
+                    </div>
+                  </div>
+                  <a href="{{route('join.class', $class->id)}}" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                </div>
+              </div> --}}
             @endforeach
           @endif
         </div>

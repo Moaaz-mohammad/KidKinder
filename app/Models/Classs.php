@@ -18,4 +18,13 @@ class Classs extends Model
         ->withPivot('joined_at') 
         ->withTimestamps();
     }
+
+    public function requests() {
+        return $this->hasMany(ClassRequest::class);
+    }
+
+    public function users() {
+        // A class can have MANY users THROUGH requests
+        return $this->belongsToMany(User::class, 'class_requests');
+    }
 }

@@ -77,6 +77,7 @@
             </a>
             {{-- this button just for me to change the view to admin --}}
             <a href="{{route('dashboard')}}" class="btn btn-primary px-4">{{Auth::user()->name}}</a>
+            <a href="{{route('userProfile')}}" class="btn btn-primary px-4">Profile</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
@@ -89,7 +90,13 @@
     </div>
     <!-- Navbar End -->
 
+
+
     @yield('content')
+
+        <div class="container">
+          @include('theme-alert')
+        </div>
 
         <!-- Footer Start -->
         <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
@@ -148,14 +155,14 @@
                 <h4 class="fa fa-envelope text-primary"></h4>
                 <div class="pl-3">
                   <h5 class="text-white">Email</h5>
-                  <p>info@example.com</p>
+                  <p>{{config('app.contact_email')}}</p>
                 </div>
               </div>
               <div class="d-flex">
                 <h4 class="fa fa-phone-alt text-primary"></h4>
                 <div class="pl-3">
                   <h5 class="text-white">Phone</h5>
-                  <p>+012 345 67890</p>
+                  <p>{{config('app.contact_phone')}}</p>
                 </div>
               </div>
             </div>
@@ -215,17 +222,7 @@
           <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;">
             <p class="m-0 text-center text-white">
               &copy;
-              <a class="text-primary font-weight-bold" href="#">Your Site Name</a>.
-              All Rights Reserved.
-    
-              <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-              Designed by
-              <a class="text-primary font-weight-bold" href="https://htmlcodex.com"
-                >HTML Codex</a
-              >
-              <br />Distributed By:
-              <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-            </p>
+              <a class="text-primary font-weight-bold" href="{{route('store')}}">KidKinder</a>
           </div>
       </div>
       <!-- Footer End -->
@@ -242,7 +239,10 @@
     <script src="{{asset('theme/lib/owlcarousel/owl.carousel.min.js')}}"></script>
     <script src="{{asset('theme/lib/isotope/isotope.pkgd.min.js')}}"></script>
     <script src="{{asset('theme/lib/lightbox/js/lightbox.min.js')}}"></script>
-
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
@@ -251,5 +251,12 @@
     <script src="{{asset('theme/js/main.js')}}"></script>
 
     @yield('js')
+
+    <script>
+    $(document).ready(function () {
+      $('.alert-action').delay(3000).fadeOut(2500);
+    })
+    </script>
+
   </body>
 </html>

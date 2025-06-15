@@ -21,6 +21,9 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'forign_id',
+        'age',
         'email',
         'password',
     ];
@@ -46,5 +49,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function images() {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function classRequests() {
+        return $this->hasMany(ClassRequest::class);
+    }
+    
+    public function classes() {
+        // A user can belong to MANY classes THROUGH requests
+        return $this->belongsToMany(Classs::class, 'class_requests');
     }
 }

@@ -112,7 +112,7 @@
                   ></i>
                   <div class="pl-3">
                     <h5>Email</h5>
-                    <p>info@example.com</p>
+                    <p>{{config('app.contact_email')}}</p>
                   </div>
                 </div>
                 <div class="d-flex">
@@ -122,7 +122,7 @@
                   ></i>
                   <div class="pl-3">
                     <h5>Phone</h5>
-                    <p>+012 345 67890</p>
+                    <p>{{config('app.contact_phone')}}</p>
                   </div>
                 </div>
                 <div class="d-flex">
