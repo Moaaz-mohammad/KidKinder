@@ -12,6 +12,10 @@
             <input type="text" class="form-control" id="teacherName" value="{{old('name', $teacher->name ?? '')}}" placeholder="Enter teacher name" name="name" required>
         </div>
         <div class="form-group">
+            <label for="teacherEmail">Teacher Email</label>
+            <input type="email" class="form-control" id="teacherEmail" value="{{old('email', $teacher->email ?? '')}}" placeholder="Enter teacher name" name="email" required>
+        </div>
+        <div class="form-group">
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="TeacherPhoto" name="TeacherPhoto" @if ($method != 'PUT') required @endif>
                 <label class="custom-file-label" for="TeacherPhoto">{{$method != "PUT" ? 'Choose Photo' : 'Choose New Photo'}}</label>

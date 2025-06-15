@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classs;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,9 @@ class DashboardController extends Controller
     public function index() {
         $students = Student::all();
         $studentsCount = $students->count();
-        return view('dashboard.index', compact('students', 'studentsCount'));
+        $teachers = Teacher::all();
+        $classes = Classs::paginate(5);
+        return view('dashboard.index', compact('students', 'studentsCount', 'teachers', 'classes'));
     }
     public function user_profile() {
         $user = Auth::user();

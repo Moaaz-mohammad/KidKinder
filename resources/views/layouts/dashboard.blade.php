@@ -262,8 +262,10 @@
 <!-- daterangepicker -->
 <script src="{{asset('dashboard/plugins/moment/moment.min.js')}}"></script>
 <script src="{{asset('dashboard/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
+<!-- Tempusdominus Bootstrap 4 && icons -->
 <script src="{{asset('dashboard/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 <!-- Summernote -->
 <script src="{{asset('dashboard/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->

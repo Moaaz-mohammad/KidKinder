@@ -31,8 +31,10 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:teachers',
             'subject_1' => 'nullable|string',
             'subject_2' => 'nullable|string',
             'subject_3' => 'nullable|string',
@@ -45,6 +47,7 @@ class TeacherController extends Controller
 
         $teacher = Teacher::create([
             'name' => $data['name'],
+            'email' => $request->email,
             'url_1' => $request->url_1,
             'url_2' => $request->url_2,
             'url_3' => $request->url_3,
@@ -99,6 +102,7 @@ class TeacherController extends Controller
         //dd( $request->all());
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:teachers',
             'subject_1' => 'required|string',
             'subject_2' => 'nullable|string',
             'subject_3' => 'nullable|string',
@@ -113,6 +117,7 @@ class TeacherController extends Controller
 
         $teacher->update([
             'name' => $request->name,
+            'email'=> $request->email,
             'url_1' => $request->url_1,
             'url_2' => $request->url_2,
             'url_3' => $request->url_3,
