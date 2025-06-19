@@ -42,7 +42,7 @@
       <nav
         class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5"
       >
-        <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px" >
+        <a href="{{route('store')}}" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px" >
           <i class="flaticon-043-teddy-bear"></i>
           <span class="text-primary">KidKinder</span>
         </a>
@@ -58,7 +58,7 @@
             <a href="{{route('AboutPage')}}" class="nav-item nav-link">About</a>
             <a href="{{route('ClassesPage')}}" class="nav-item nav-link">Classes</a>
             <a href="{{route('TeamPage')}}" class="nav-item nav-link">Teachers</a>
-            <a href="{{route('GalleryPage')}}" class="nav-item nav-link">Gallery</a>
+            {{-- <a href="{{route('GalleryPage')}}" class="nav-item nav-link">Gallery</a> --}}
             {{-- <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"  >Pages</a >
                 <div class="dropdown-menu rounded-0 m-0">
@@ -70,14 +70,18 @@
           </div>
           @auth
           <div>
-            <a class=" btn btn-primary px-4" href="{{ route('logout') }}"
-            onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-            {{-- this button just for me to change the view to admin --}}
-            <a href="{{route('dashboard')}}" class="btn btn-primary px-4">{{Auth::user()->name}}</a>
-            <a href="{{route('userProfile')}}" class="btn btn-primary px-4">Profile</a>
+            @if (auth()->check() && auth()->user()->hasRole('admin'))
+              <a class=" btn btn-primary px-4" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}
+              </a>
+              {{-- this button just for me to change the view to admin --}}
+              <a href="{{route('dashboard')}}" class="btn btn-primary px-4">Dashboard</a>
+            @else
+              <a href="{{route('userProfile')}}" class="btn btn-primary px-4">Profile</a>
+            @endif
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
             </form>

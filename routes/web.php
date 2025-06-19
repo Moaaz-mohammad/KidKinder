@@ -63,8 +63,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::middleware(['auth', 'verified'])->group(function(){
-    // Dashboard //
+Route::middleware(['auth', 'verified', 'role:user'])->group(function(){
+    //- View Blade 
+    Route::get('classes/{id}/join/', [ThemeController::class, 'joinClass'])->name('join.class');
+    Route::post('class/join', [ClassRequestController::class, 'store'])->name('class.request.store');
+    Route::get('class/requests/view', [ClassRequestController::class, 'index'])->name('requests.index');
+    Route::get('class/{id}/request/show', [ClassRequestController::class, 'show'])->name('request.show');
+    // User Profile
+    Route::get('user/profile', [ThemeController::class, 'showProfile'])->name('userProfile');
+    Route::post('user/profile/{id}', [ThemeController::class, 'update'])->name('settingsUpdate');
+});
+
+    Route::group(['middleware' => ['role:admin']], function(){
+        // Dashboard //
     Route::get('dashboard/home/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/user/profile', [DashboardController::class, 'user_profile'])->name('UserProfile');
     Route::put('dashboard/user/profile/{id}/edit', [DashboardController::class, 'Update'])->name('user.edit');
@@ -80,20 +91,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('user/requests/{id}/reject', [AdminRequestController::class, 'reject'])->name('admin.requests.reject');
     Route::post('user/requests/{id}/pending', [AdminRequestController::class, 'pending'])->name('admin.requests.pending');
     Route::get('user/{id}/requests/show', [AdminRequestController::class, 'show'])->name('admin.requests.show');
-    //- View Blade 
-    Route::get('classes/{id}/join/', [ThemeController::class, 'joinClass'])->name('join.class');
-    Route::post('class/join', [ClassRequestController::class, 'store'])->name('class.request.store');
-    Route::get('class/requests/view', [ClassRequestController::class, 'index'])->name('requests.index');
-    Route::get('class/{id}/request/show', [ClassRequestController::class, 'show'])->name('request.show');
-    // User Profile
-    Route::get('user/profile', [ThemeController::class, 'showProfile'])->name('userProfile');
-    Route::post('user/profile/{id}', [ThemeController::class, 'update'])->name('settingsUpdate');
 });
-
-
-// Route::moddleware(['auth', 'verified'])->group(function () {
-
-// });
 
 
 

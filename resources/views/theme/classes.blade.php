@@ -69,7 +69,16 @@
                       <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
                     </div>
                   </div>
-                  <a href="{{$existsRequest ? route('requests.index') : route('join.class', $class->id)}}" class="btn {{$existsRequest ? 'btn-secondary disabled' : "btn-primary"}} px-4 mx-auto mb-4" @if ($existsRequest) aria-disabled="true" @endif>{{$existsRequest ? 'Already Requested' : 'Join Class'}}</a>
+                  @hasrole('admin')
+                    <a href="{{route('admin.requests.index')}}" class="btn btn-secondary px-4 mx-auto mb-4">You are an Admin</a>
+                  @else 
+                    <a 
+                      href="{{$existsRequest ? route('requests.index') : route('join.class', $class->id)}}" 
+                      class="btn {{$existsRequest ? 'btn-secondary disabled' : "btn-primary"}} px-4 mx-auto mb-4" 
+                      @if ($existsRequest) aria-disabled="true" @endif>
+                      {{$existsRequest ? 'Already Requested' : 'Join Class'}}
+                    </a>
+                  @endhasrole
                 </div>
               </div>
               {{-- <div class="col-lg-4 mb-5">

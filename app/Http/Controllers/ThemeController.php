@@ -20,11 +20,11 @@ class ThemeController extends Controller
     public function showProfile() {
         $user = auth()->user();
         
-        $requests = $user->classRequests->last()->get();
+        $requests = $user->classRequests;
 
-        $totalRequests = $user->classRequests->count();
-        $approvedRequests = $user->classRequests->where('status', 'approved')->count();
-        $rejectedRequests = $user->classRequests->where('status', 'rejected')->count();
+            $totalRequests = $user->classRequests->count();
+            $approvedRequests = $user->classRequests->where('status', 'approved')->count();
+            $rejectedRequests = $user->classRequests->where('status', 'rejected')->count();
         return view('theme.user-profile', compact('user', 'requests', 'totalRequests', 'approvedRequests', 'rejectedRequests'));
     }
 

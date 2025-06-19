@@ -18,7 +18,7 @@
             ipsum at ipsum nonumy amet. Clita lorem dolore sed stet et est justo
             dolore.
           </p>
-          <a href="" class="btn btn-secondary mt-1 py-3 px-5">Learn More</a>
+          <a href="{{route('AboutPage')}}" class="btn btn-secondary mt-1 py-3 px-5">Learn More</a>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
           <img class="img-fluid mt-5" src="{{asset('theme/img/header.png')}}" alt="" />
@@ -239,7 +239,15 @@
                       <div class="col-6 py-1">${{$class->tution_fee}} / Month</div>
                     </div>
                   </div>
-                  <a href="{{ $hasExistsRequest ? route('requests.index') : route('join.class', $class->id)}}" class="btn {{ $hasExistsRequest  ? 'btn-secondary disabled' : 'btn-primary' }} btn-primary px-4 mx-auto mb-4" @if ($hasExistsRequest) aria-disabled="true"  @endif>{{$hasExistsRequest ? 'Already Requested' : 'Join CLass' }}</a>
+                    @if (auth()->check() && auth()->user()->hasRole('admin'))
+                      <a href="{{route('admin.requests.index')}}" class="btn btn-secondary px-4 mx-auto mb-4 " >You are an Admin</a>
+                    @else
+                    <a href="{{ $hasExistsRequest ? route('requests.index') : route('join.class', $class->id)}}"
+                      class="btn {{ $hasExistsRequest  ? 'btn-secondary disabled' : 'btn-primary' }} btn-primary px-4 mx-auto mb-4" 
+                      @if ($hasExistsRequest) aria-disabled="true" @endif>
+                      {{$hasExistsRequest ? 'Already Requested' : 'Join CLass' }}
+                    </a>
+                    @endif
                 </div>
               </div>
             @endforeach

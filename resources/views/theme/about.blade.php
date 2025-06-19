@@ -26,7 +26,7 @@
               <div class="col-lg-5">
                 <img
                   class="img-fluid rounded mb-5 mb-lg-0"
-                  src="img/about-1.jpg"
+                  src="{{asset('theme/img/about-1.jpg')}}"
                   alt=""
                 />
               </div>
@@ -43,7 +43,7 @@
                 </p>
                 <div class="row pt-2 pb-4">
                   <div class="col-6 col-md-4">
-                    <img class="img-fluid rounded" src="img/about-2.jpg" alt="" />
+                    <img class="img-fluid rounded" src="{{asset('theme/img/about-2.jpg')}}" alt="" />
                   </div>
                   <div class="col-6 col-md-8">
                     <ul class="list-inline m-0">

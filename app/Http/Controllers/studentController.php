@@ -68,6 +68,7 @@ class studentController extends Controller
             ]);
         }
 
+        $student->assignRole('user');
         return redirect()->route('student.index')->with('primary','Student information saved successfully.');
     }
 
