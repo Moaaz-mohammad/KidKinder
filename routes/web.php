@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\SmartPunct\DashParser;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\ContactController;
 use Psy\Output\Theme;
 
 /*
@@ -49,6 +50,7 @@ Route::get('/team', [ThemeController::class, 'teamPage'])->name('TeamPage');
 Route::get('/gallery', [ThemeController::class, 'galleryPage'])->name('GalleryPage');
 
 Route::get('/contact', [ThemeController::class, 'contactPage'])->name('ContactPage');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/blog', [ThemeController::class, 'blogPage'])->name('BlogPage');
 

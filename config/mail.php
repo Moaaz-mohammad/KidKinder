@@ -86,6 +86,7 @@ return [
         ],
     ],
 
+    'contact_receiver' => env('MAIL_CONTACT_RECEIVER', 'default@example.com'),
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address

@@ -93,14 +93,14 @@
       </nav>
     </div>
     <!-- Navbar End -->
-
+        <div class="alert-container position-fixed top-0 end-0 p-3" style="z-index: 1100; width: 350px;">
+          @include('theme-alert')
+        </div>
 
 
     @yield('content')
 
-        <div class="container">
-          @include('theme-alert')
-        </div>
+  
 
         <!-- Footer Start -->
         <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">

@@ -31,12 +31,14 @@
               <div class="col-lg-7 mb-5">
                 <div class="contact-form">
                   <div id="success"></div>
-                  <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                  <form action="{{route('contact.store')}}" name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
+                    @csrf
                     <div class="control-group">
                       <input
                         type="text"
                         class="form-control"
                         id="name"
+                        name="name"
                         placeholder="Your Name"
                         required="required"
                         data-validation-required-message="Please enter your name"
@@ -46,6 +48,7 @@
                     <div class="control-group">
                       <input
                         type="email"
+                        name="email"
                         class="form-control"
                         id="email"
                         placeholder="Your Email"
@@ -57,6 +60,7 @@
                     <div class="control-group">
                       <input
                         type="text"
+                        name="subject"
                         class="form-control"
                         id="subject"
                         placeholder="Subject"
@@ -68,6 +72,7 @@
                     <div class="control-group">
                       <textarea
                         class="form-control"
+                        name="message"
                         rows="6"
                         id="message"
                         placeholder="Message"
