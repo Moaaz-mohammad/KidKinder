@@ -85,6 +85,19 @@ class ClasssController extends Controller
             }
 
             $class->students()->attach($pivotData);
+
+            $seatsToRemove = count($studentsIds);
+
+            if ($class->total_seats >= $seatsToRemove) {
+                $class->total_seats -= $seatsToRemove;
+                $class->save();
+            }
+            //  else {
+            // //    return response()->json([
+            // //        'error' => true,
+            // //        'message' => 'No seats available'
+            // //    ]);
+            //  }
         }
 
 
@@ -140,7 +153,7 @@ class ClasssController extends Controller
             'class_number' => 'integer',
             'from_age' => 'integer|min:1',
             'to_age' => 'integer|min:1|gte:from_age',
-            'total_seats' => 'integer|min:1',
+            // 'total_seats' => 'integer|min:1',
             'tution_fee' => 'numeric|min:0',
             'from_time' => 'date_format:H:i:s,H:i|before:to',
             'to' => 'date_format:H:i:s,H:i|after:from_time',
@@ -159,15 +172,35 @@ class ClasssController extends Controller
             'class_number' => $request->class_number,
             'from_age' => $request->from_age,
             'to_age' => $request->to_age,
-            'total_seats' => $request->total_seats,
+            // 'total_seats' => $request->total_seats,
             'tution_fee' => $request->tution_fee,
             'from_time' => $request->from_time,
             'to' => $request->to,
             'description' => $request->description
         ]);
 
-        // Frist Way -----------
-        $class->students()->sync($request->Check ?? []);
+
+        $currentStudentsIds = $class->students->pluck('id')->toArray();
+
+        $newStudentsIds = $request->Check ?? [];
+
+        $addedStudents = array_diff($newStudentsIds, $currentStudentsIds);
+
+        $removedStudents = array_diff($currentStudentsIds, $newStudentsIds);
+
+        $class->students()->sync($newStudentsIds);
+
+        $seatsToDecrease = count($addedStudents);
+        $seatsToIncrease = count($removedStudents);
+
+        $class->total_seats = $class->total_seats - $seatsToDecrease + $seatsToIncrease;
+        if ($class->total_seats < 0) {
+            $class->total_seats = 0;
+        }
+
+        $class->save();
+
+        // $class->students()->sync($request->Check ?? []);
 
         // Secound Way -------
         // if (count($request->Check) <= 1) {

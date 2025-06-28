@@ -38,10 +38,12 @@
                     </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="Total_Seats">Total Seats</label>
-                    <input type="number" class="form-control" id="Total_Seats" placeholder="Seats Number" name="total_seats" value="{{old('total_seats', $class->total_seats ?? '')}}">
-                </div>
+                @if ($method != 'PUT')
+                    <div class="form-group">
+                        <label for="Total_Seats">Total Seats</label>
+                        <input type="number" class="form-control" id="Total_Seats" placeholder="Seats Number" name="total_seats" value="{{old('total_seats', $class->total_seats ?? '')}}">
+                    </div>
+                @endif
                 <div class="form-group">
                     <label for="Tution_Fee">Tution Fee</label>
                     <input type="number" class="form-control" id="Tution_Fee" placeholder="Enter Tution Fee" name="tution_fee" value="{{old('tution_fee', $class->tution_fee ?? '')}}">
