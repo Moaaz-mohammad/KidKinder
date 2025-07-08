@@ -54,6 +54,7 @@ class ClassRequestStatusNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
+            'title' => "Your request is {$this->status}",
             'message' => "Your request for {$this->className} has been {$this->status}",
             'url' => 'class/requests/view'
         ];

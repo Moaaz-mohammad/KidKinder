@@ -20,14 +20,41 @@
             font-weight: 600;
             border-bottom: 3px solid #0d6efd;
         }
+
+        .notification-item {
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .notification-item.unread {
+            background-color: #f0f7ff;
+        }
+
+        .notification-item .btn-close {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .notification-item:hover .btn-close {
+            opacity: 0.5;
+        }
+
+        .notification-item:hover .btn-close:hover {
+            opacity: 1;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container py-5">
         <div class="row">
+
             <div class="col-lg-4">
-                <div class="card shadow-sm mb-4">
+                <div class="card shadow-sm mb-4 profile">
                     <div class="card-body text-center">
                         <img src="{{asset('dashboard/dist/img/NoPhoto.jpg')}}" alt="Profile" class="rounded-circle profile-avatar mb-3 img-thumbnail">
                         <h4 class="mb-1">{{$user->name . ' '. $user->last_name}}</h4>
@@ -36,7 +63,8 @@
                             <a class="btn btn-danger m-2" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">Logout</a>
-                            {{-- <button class="btn btn-outline-secondary">Message</button> --}}
+                            <a href="{{route('notifications.index')}}" class="btn btn-light m-2 text-warning"><i class="bi bi-bell-fill"></i> {{auth()->user()->unreadNotifications->count() > 0 ? auth()->user()->unreadNotifications->count() : ''}} </a>
+                            {{-- <a class="btn btn-secondary m-2 text-warning"><i class="bi bi-bell-fill"></i> </a> --}}
                         </div>
                         <div class="d-flex justify-content-around text-center">
                             <div>
@@ -60,13 +88,20 @@
                         <h5 class="card-title">Requests</h5>
                         <ul class="list-unstyled">
                             <li class="mb-2">
-                                <a href="{{route('requests.index')}}" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-list-ul"></i> View All Requests
-                                </a>
+                                @if (count($requests) > 0)
+                                    <a href="{{route('requests.index')}}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-list-ul"></i> View All Requests
+                                    </a>
+                                @else
+                                    <div class="text-center">
+                                        <p>No Requests</p>
+                                    </div>
+                                @endif
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
             
             <div class="col-lg-8">
@@ -128,9 +163,15 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <a href="{{route('requests.index')}}" class="btn btn-primary">
-                                    <i class="bi bi-list-ul"></i> View All Requests
-                                </a>
+                                @if (count($requests) > 5)
+                                    <a href="{{route('requests.index')}}" class="btn btn-primary">
+                                        <i class="bi bi-list-ul"></i> View All Requests
+                                    </a>
+                                @elseif(count($requests) == 0)
+                                    <div class="text-center">
+                                        <p>No Requests</p>
+                                    </div>
+                                @endif
                             </div>
                             
                             <div class="tab-pane fade" id="settings">
@@ -148,6 +189,60 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Notifications</h5>
+                            @if (count($notifications) >= 2)
+                                <form action="{{route('notifications.markAllRead')}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary mark-all-read">
+                                        Mark all as read
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
+                        
+                        <div class="notification-list">
+                            
+                            @if ($notifications->isEmpty())
+                                <div class="text-center">
+                                    <p>No notifications found</p>
+                                </div>
+                            @endif
+
+                            @foreach ($notifications->take(5) as $notification)
+                                <div class="notification-item p-3 border-bottom">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 mr-3">
+                                            <i class="bi bi-check-circle-fill text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <p class="mb-1">{{$notification->data['title'] ?? "No title"}}</p>
+                                            <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
+                                        </div>
+                                        
+                                        @if ($notification->unread())
+                                            <form action="{{route('notifications.markAsRead', $notification->id)}}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-close notification-dismiss">Mark as read</button>
+                                            </form>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            @endforeach
+                            
+                        </div>
+                        
+                        <a href="{{ route('notifications.index') }}" class="btn btn-sm btn-link w-100 mt-2">
+                            View all notifications
+                        </a>
                     </div>
                 </div>
             </div>

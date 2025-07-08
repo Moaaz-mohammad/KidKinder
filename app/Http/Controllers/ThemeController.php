@@ -22,10 +22,12 @@ class ThemeController extends Controller
         
         $requests = $user->classRequests;
 
-            $totalRequests = $user->classRequests->count();
-            $approvedRequests = $user->classRequests->where('status', 'approved')->count();
-            $rejectedRequests = $user->classRequests->where('status', 'rejected')->count();
-        return view('theme.user-profile', compact('user', 'requests', 'totalRequests', 'approvedRequests', 'rejectedRequests'));
+        $totalRequests = $user->classRequests->count();
+        $approvedRequests = $user->classRequests->where('status', 'approved')->count();
+        $rejectedRequests = $user->classRequests->where('status', 'rejected')->count();
+
+        $notifications = $user->notifications;
+        return view('theme.user-profile', compact('user', 'requests', 'totalRequests', 'approvedRequests', 'rejectedRequests', 'notifications'));
     }
 
     public function update(Request $request, $id) {

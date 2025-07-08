@@ -17,6 +17,8 @@ use League\CommonMark\Extension\SmartPunct\DashParser;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NotificationController;
+use Illuminate\Notifications\Notification;
 use Psy\Output\Theme;
 
 /*
@@ -74,6 +76,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function(){
     // User Profile
     Route::get('user/profile', [ThemeController::class, 'showProfile'])->name('userProfile');
     Route::post('user/profile/{id}', [ThemeController::class, 'update'])->name('settingsUpdate');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class , 'markAsRead'])->name('notifications.markAsRead');
+    Route::post('/notifications/mark-all-as-read/', [NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    Route::delete('/notifications', [NotificationController::class, 'destroyAll'])->name('notifications.destroyAll');
 });
 
     Route::group(['middleware' => ['role:admin']], function(){

@@ -145,7 +145,7 @@
           <div class="col-lg-5">
             <img
               class="img-fluid rounded mb-5 mb-lg-0"
-              src="img/about-1.jpg"
+              src="{{asset('theme/img/about-1.jpg')}}"
               alt=""
             />
           </div>
@@ -258,7 +258,7 @@
     <!-- Class End -->
 
     <!-- Registration Start -->
-    <div class="container-fluid py-5">
+    {{-- <div class="container-fluid py-5">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-7 mb-5 mb-lg-0">
@@ -336,7 +336,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
     <!-- Registration End -->
 
     <!-- Team Start -->
@@ -392,94 +392,94 @@
     <!-- Team End -->
 
     <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
-      <div class="container p-0">
-        <div class="text-center pb-2">
-          <p class="section-title px-5">
-            <span class="px-2">Testimonial</span>
-          </p>
-          <h1 class="mb-4">What Parents Say!</h1>
+      {{-- <div class="container-fluid py-5">
+        <div class="container p-0">
+          <div class="text-center pb-2">
+            <p class="section-title px-5">
+              <span class="px-2">Testimonial</span>
+            </p>
+            <h1 class="mb-4">What Parents Say!</h1>
+          </div>
+          <div class="owl-carousel testimonial-carousel">
+            <div class="testimonial-item px-3">
+              <div class="bg-light shadow-sm rounded mb-4 p-4">
+                <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
+                eirmod clita lorem. Dolor tempor ipsum clita
+              </div>
+              <div class="d-flex align-items-center">
+                <img
+                  class="rounded-circle"
+                  src="img/testimonial-1.jpg"
+                  style="width: 70px; height: 70px"
+                  alt="Image"
+                />
+                <div class="pl-3">
+                  <h5>Parent Name</h5>
+                  <i>Profession</i>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-item px-3">
+              <div class="bg-light shadow-sm rounded mb-4 p-4">
+                <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
+                eirmod clita lorem. Dolor tempor ipsum clita
+              </div>
+              <div class="d-flex align-items-center">
+                <img
+                  class="rounded-circle"
+                  src="img/testimonial-2.jpg"
+                  style="width: 70px; height: 70px"
+                  alt="Image"
+                />
+                <div class="pl-3">
+                  <h5>Parent Name</h5>
+                  <i>Profession</i>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-item px-3">
+              <div class="bg-light shadow-sm rounded mb-4 p-4">
+                <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
+                eirmod clita lorem. Dolor tempor ipsum clita
+              </div>
+              <div class="d-flex align-items-center">
+                <img
+                  class="rounded-circle"
+                  src="img/testimonial-3.jpg"
+                  style="width: 70px; height: 70px"
+                  alt="Image"
+                />
+                <div class="pl-3">
+                  <h5>Parent Name</h5>
+                  <i>Profession</i>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-item px-3">
+              <div class="bg-light shadow-sm rounded mb-4 p-4">
+                <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
+                eirmod clita lorem. Dolor tempor ipsum clita
+              </div>
+              <div class="d-flex align-items-center">
+                <img
+                  class="rounded-circle"
+                  src="img/testimonial-4.jpg"
+                  style="width: 70px; height: 70px"
+                  alt="Image"
+                />
+                <div class="pl-3">
+                  <h5>Parent Name</h5>
+                  <i>Profession</i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="owl-carousel testimonial-carousel">
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="img/testimonial-1.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="img/testimonial-2.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="img/testimonial-3.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="img/testimonial-4.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </div> --}}
     <!-- Testimonial End -->
 
     <!-- Blog Start -->
@@ -494,7 +494,7 @@
         <div class="row pb-3">
           <div class="col-lg-4 mb-4">
             <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="img/blog-1.jpg" alt="" />
+              <img class="card-img-top mb-2" src="{{asset('theme/img/blog-1.jpg')}}" alt="" />
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
@@ -521,7 +521,7 @@
           </div>
           <div class="col-lg-4 mb-4">
             <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="img/blog-2.jpg" alt="" />
+              <img class="card-img-top mb-2" src="{{asset('theme/img/blog-2.jpg')}}" alt="" />
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
@@ -548,7 +548,7 @@
           </div>
           <div class="col-lg-4 mb-4">
             <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="img/blog-3.jpg" alt="" />
+              <img class="card-img-top mb-2" src="{{asset('theme/img/blog-3.jpg')}}" alt="" />
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
