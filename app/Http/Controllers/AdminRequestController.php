@@ -50,7 +50,7 @@ class AdminRequestController extends Controller
 
         $ClassRequest->update(['status' => 'Approved']);
 
-        // $ClassRequest->user->notify(new ClassRequestStatusNotification('approved', $ClassRequest->class->class_content_name));
+        $ClassRequest->user->notify(new ClassRequestStatusNotification('approved', $ClassRequest->class->class_content_name));
 
         return redirect()->back()->with('success', 'Request Approved');
     }
