@@ -128,4 +128,8 @@ class DashboardController extends Controller
             'message' => 'Photo removed successfully'
         ]);
     }
+
+    public function Emails_form_page() {
+        return view('dashboard.EmailsForm_page');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminMailController;
 use App\Http\Controllers\AdminRequestController;
 use App\Http\Controllers\ClassRequestController;
 use App\Http\Controllers\ClasssController;
@@ -91,6 +92,9 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function(){
     Route::put('dashboard/user/profile/{id}/edit', [DashboardController::class, 'Update'])->name('user.edit');
     Route::post('dashboard/user/password/{id}/edit', [DashboardController::class, 'updatePassword'])->name('user.password.edit');
     Route::delete('dashboard/user/photo/{id}/remove', [DashboardController::class, 'removePhoto'])->name('user.photo.remove');
+    // Send Mail
+    Route::get('emails/send', [DashboardController::class, 'Emails_form_page'])->name('EmailsForm');
+    Route::post('/admin/send-mail', [AdminMailController::class, 'send'])->name('admin.send.mail');
      //- Classes Controller
     Route::resource('dashboard/class', ClasssController::class);
     Route::resource('dashboard/teacher', TeacherController::class);

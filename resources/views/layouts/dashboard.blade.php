@@ -104,13 +104,116 @@
       </div>
 
       <!-- Sidebar Menu -->
+        {{-- <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+              with font-awesome or any other icon font library -->
+              <li class="nav-item">
+                <a href="{{route('dashboard')}}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Home
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-chalkboard-teacher me-2"></i>
+                  <p>
+                    Students
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('student.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Students</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('student.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Student</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-chalkboard-teacher me-2"></i>
+                  <p>
+                    Teachers
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('teacher.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Teachers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('teacher.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add Teacher</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie me-2"></i>
+                  <p>
+                    Classes
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview me-2">
+                  <li class="nav-item">
+                    <a href="{{route('class.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Classes</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('class.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Create Class</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-paper-plane me-2"></i>
+                  <p>
+                    Request Management
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.requests.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>All Requests</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+          </ul>
+        </nav> --}}
+
+      {{-- Updated Sidebar --}}
+      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="{{route('dashboard')}}" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+                <i class="nav-icon fas fa-home"></i>
                 <p>
                   Home
                 </p>
@@ -118,7 +221,7 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="fas fa-chalkboard-teacher me-2"></i>
+                <i class="nav-icon fas fa-users me-2"></i>
                 <p>
                   Students
                   <i class="right fas fa-angle-left"></i>
@@ -127,13 +230,13 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="{{route('student.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-list nav-icon"></i>
                     <p>All Students</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('student.create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-plus-circle nav-icon"></i>
                     <p>Add Student</p>
                   </a>
                 </li>
@@ -141,7 +244,7 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="fas fa-chalkboard-teacher me-2"></i>
+                <i class="nav-icon fas fa-chalkboard-teacher me-2"></i>
                 <p>
                   Teachers
                   <i class="right fas fa-angle-left"></i>
@@ -150,13 +253,13 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="{{route('teacher.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-list nav-icon"></i>
                     <p>All Teachers</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('teacher.create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-plus-circle nav-icon"></i>
                     <p>Add Teacher</p>
                   </a>
                 </li>
@@ -164,7 +267,7 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie me-2"></i>
+                <i class="nav-icon fas fa-school me-2"></i>
                 <p>
                   Classes
                   <i class="right fas fa-angle-left"></i>
@@ -173,13 +276,13 @@
               <ul class="nav nav-treeview me-2">
                 <li class="nav-item">
                   <a href="{{route('class.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-list nav-icon"></i>
                     <p>All Classes</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('class.create')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-plus-circle nav-icon"></i>
                     <p>Create Class</p>
                   </a>
                 </li>
@@ -187,7 +290,24 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="fas fa-paper-plane me-2"></i>
+                <i class="nav-icon fas fa-envelope me-2"></i>
+                <p>
+                  Emails
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('EmailsForm')}}" class="nav-link">
+                    <i class="fas fa-list nav-icon"></i>
+                    <p>Send an Email</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-envelope me-2"></i>
                 <p>
                   Request Management
                   <i class="right fas fa-angle-left"></i>
@@ -196,7 +316,7 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="{{route('admin.requests.index')}}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-list nav-icon"></i>
                     <p>All Requests</p>
                   </a>
                 </li>
@@ -204,6 +324,7 @@
             </li>
         </ul>
       </nav>
+<!-- /.sidebar-menu -->
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
