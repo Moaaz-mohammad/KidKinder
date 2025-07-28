@@ -12,12 +12,16 @@ class ClassForm extends Component
      * Create a new component instance.
      */
     public $students;
+    public $teachers;
+    public $selectedTeacher;
     public $method;
     public $action;
     public $class;
-    public function __construct($action, $students = null, $method = 'POST', $class=null)
+    public function __construct($action, $selectedTeacher = null ,$students = null, $teachers = null, $method = 'POST', $class=null)
     {
         $this->students = $students;
+        $this->teachers = $teachers;
+        $this->selectedTeacher = (array) $selectedTeacher;
         $this->method = $method;
         $this->action = $action;
         $this->class = $class;

@@ -71,16 +71,15 @@
                     <option>option 5</option>
                     </select>
                 </div> --}}
-                {{-- <div class="form-group">
+                <div class="form-group">
                     <label>Main Teacher</label>
-                    <select class="custom-select">
-                    <option>Teacher 1</option>
-                    <option>Teacher 2</option>
-                    <option>Teacher 3</option>
-                    <option>Teacher 4</option>
-                    <option>Teacher 5</option>
+                    <select name="teacher_id" class="custom-select">
+                        <option>Select Teacher</option>
+                        @foreach ($teachers as $teacher)
+                            <option value="{{$teacher->id}}" {{ $method == 'PUT' && in_array($teacher->id, $selectedTeacher) ? 'selected' : '' }}>{{$teacher->name}}</option>
+                        @endforeach
                     </select>
-                </div> --}}
+                </div>
                 {{-- <div class="form-group">
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">

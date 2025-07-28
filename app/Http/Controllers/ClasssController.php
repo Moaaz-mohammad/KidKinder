@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classs;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,7 +26,8 @@ class ClasssController extends Controller
     public function create()
     {
         $students = Student::all();
-        return view('dashboard.classes.make', compact('students'));
+        $teachers = Teacher::all();
+        return view('dashboard.classes.make', compact('students', 'teachers'));
     }
 
     /**
@@ -33,6 +35,7 @@ class ClasssController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
 
         $request->merge([
             'from_time' => substr($request->from_time, 0 , 5),
@@ -100,6 +103,12 @@ class ClasssController extends Controller
             //  }
         }
 
+        if (!empty($request->teacher_id)) {
+            $class->teachers()->attach($request->teacher_id);
+            // $teacher = Teacher::findOrFail($request->teacher_id);
+            // $teacher->classses()->attach($class->id);
+
+        }
 
         return response()->json([
         'success' => true,
@@ -129,8 +138,10 @@ class ClasssController extends Controller
     {
         $class = Classs::find($request->class_id);
         $students = Student::all();
+        $teachers = Teacher::all();
         $classStudents = $class->students->pluck('id')->toArray();
-        return view('dashboard.classes.edit', compact('class', 'students', 'classStudents'));
+        $selectedTeacher = $class->teachers->pluck('id')->toArray();
+        return view('dashboard.classes.edit', compact('class', 'students', 'classStudents', 'teachers', 'selectedTeacher'));
     }
 
     /**
@@ -209,6 +220,10 @@ class ClasssController extends Controller
         //     $class->students()->detach();
         // }
         
+        if ($request->filled('teacher_id')) {
+            $class->teachers()->sync($request->teacher_id);
+        }
+
         return response()->json([
             'success' => true,
             "message" => 'Class Updated Successfully'

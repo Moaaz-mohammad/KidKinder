@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row">
-    <x-class-form :students="$students" :class="$class" :method="'PUT'" :action="route('class.update', $class->id)">
+    <x-class-form :students="$students" :teachers="$teachers" :selectedTeacher="$selectedTeacher" :class="$class" :method="'PUT'" :action="route('class.update', $class->id)">
       
       <input type="hidden" name="classId" value="{{$class->id}}">
     </x-class-form>

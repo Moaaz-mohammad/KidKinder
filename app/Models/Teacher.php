@@ -21,4 +21,8 @@ class Teacher extends Model
     public function images() {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function classses() {
+        return $this->belongsToMany(Classs::class, 'class_teacher', 'teacher_id', 'classs_id')->withTimestamps();
+    }
 }

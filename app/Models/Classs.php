@@ -27,4 +27,8 @@ class Classs extends Model
         // A class can have MANY users THROUGH requests
         return $this->belongsToMany(User::class, 'class_requests');
     }
+
+    public function teachers() {
+        return $this->belongsToMany(Teacher::class, 'class_teacher', 'classs_id' ,'teacher_id')->withTimestamps();
+    }
 }

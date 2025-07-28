@@ -4,7 +4,7 @@
 
 @section('content')
   <div class="row">
-    <x-class-form :action="route('class.store')" :students="$students">
+    <x-class-form :action="route('class.store')" :teachers="$teachers" :students="$students">
 
     </x-class-form>
     <div id="errorMessages" class="alert alert-danger d-none"></div>
